@@ -7,7 +7,7 @@ package htqlytourdulich;
 
 /**
  *
- * @author Thanh
+ * @author Thanh test ne
  */
 public class Account {
 
