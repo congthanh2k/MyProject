@@ -17,9 +17,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -1661,6 +1665,7 @@ public class QLHT extends javax.swing.JFrame {
 
     private void btnttKhachhang1ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnttKhachhang1ThemActionPerformed
         // TODO add your handling code here:
+        
         String makh = tMaKhTTKhachHang.getText();
         String tenkh = tTenKhTTKhachHang.getText();
         String sdtkh = tSdtTTKhachHang.getText();
@@ -1689,7 +1694,11 @@ public class QLHT extends javax.swing.JFrame {
         }
 
         if (flagCheckLoi == 0) {
-            TTKhachHangModify.insert(ttkh);
+            try {
+                TTKhachHangModify.insert(ttkh);
+            } catch (ParseException ex) {
+                Logger.getLogger(QLHT.class.getName()).log(Level.SEVERE, null, ex);
+            }
             showTTKhachHang();
             JOptionPane.showMessageDialog(this, "Lưu thành công");
             tMaKhTTKhachHang.setText("");
