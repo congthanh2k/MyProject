@@ -21,5 +21,6 @@ public class Test {
         newDateFormat.applyPattern("yyyy/MM/dd");
         String myDateString = newDateFormat.format(myDate);
         System.out.println(myDateString);
+        System.out.println("");
     }
 }
