@@ -74,6 +74,7 @@ public class Test {
         }
 
         sc.close();
+        System.out.println("");
     }
     }
 }
