@@ -31,6 +31,7 @@ public class Dang_Nhap extends javax.swing.JFrame {
 
     Statement st;
     ResultSet rs;
+    ResultSet rs2;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -167,7 +168,9 @@ public class Dang_Nhap extends javax.swing.JFrame {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=qltourdulich", "sa", "123456");
+            
             String sql = "select * from Account where Username = ? and Password= ?";
+            
             PreparedStatement ps = con.prepareCall(sql);
             String passString = "";
             String userString = btnUsername.getText();
@@ -183,12 +186,35 @@ public class Dang_Nhap extends javax.swing.JFrame {
             ps.setString(2, passString);
             rs = ps.executeQuery();
 
+            String sql2 = "select * from TTKhachHang where MaKH = ? and TenKH= ?";
+
+            PreparedStatement ps2 = con.prepareCall(sql2);
+            String passString2 = "";
+            String userString2 = btnUsername.getText();
+            char[] passwordArray2 = btnPassword.getPassword();
+
+            for (int i = 0; i < passwordArray2.length; i++) {
+                String temp2 = String.valueOf(passwordArray[i]);
+                passString2 = passString2 + temp2;
+            }
+            //check pass : System.out.println("passString: " + passString);
+            ps2.setString(1, btnUsername.getText());
+
+            ps2.setString(2, passString2);
+            rs2 = ps2.executeQuery();
+
             if (userString.equals("") || passString.equals("")) {
                 JOptionPane.showMessageDialog(this, "Chưa nhập tài khoản hoặc mật khẩu");
-            } else if (rs.next() || passString.equals("1111") && userString.equals("1111")) {
-                QLHT ql = new QLHT(); JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+            } else if (rs.next()) {
+                QLHT ql = new QLHT();
                 ql.setVisible(true);
-                ql.setLocationRelativeTo(null);             
+                ql.setLocationRelativeTo(null);
+                this.dispose();
+                JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+            } else if (rs2.next()) {
+                Employee e = new Employee();
+                e.setVisible(true);
+                e.setLocationRelativeTo(null);
                 this.dispose();
                 JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
             } else {

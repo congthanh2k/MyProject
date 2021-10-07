@@ -82,14 +82,14 @@ public class TTKhachHangModify {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=qltourdulich", "sa", "123456");
-            
+
             String sql = "Select [MaKH],[TenKH],[SdtKH],[Email],[DiachiKH], CONVERT(varchar, [NgaySinh], 103) as NgaySinh from[dbo].[TTKhachHang]";
             statement = connection.createStatement();
 
             ResultSet resulSet = statement.executeQuery(sql);
 
             while (resulSet.next()) {
-                
+
                 TTKhachHang acc = new TTKhachHang(resulSet.getString("MaKH"),
                         resulSet.getString("TenKH"),
                         resulSet.getString("SdtKH"),
@@ -128,12 +128,12 @@ public class TTKhachHangModify {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=qltourdulich", "sa", "123456");
-            
+
             SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date myDate = newDateFormat.parse(acc.getNgaySinh());
             newDateFormat.applyPattern("yyyy/MM/dd");
             String myDateString = newDateFormat.format(myDate);
-            
+
             if (acc.flagCapnhatDN == 0) {
                 String sql = "insert into TTKhachHang(MaKH, TenKH, SdtKH, Email, DiachiKH, NgaySinh) values(?, ?, ?, ?, ?, ?)";
                 statement = connection.prepareCall(sql);

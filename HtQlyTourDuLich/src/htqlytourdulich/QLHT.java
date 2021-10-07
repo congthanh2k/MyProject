@@ -1665,7 +1665,7 @@ public class QLHT extends javax.swing.JFrame {
 
     private void btnttKhachhang1ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnttKhachhang1ThemActionPerformed
         // TODO add your handling code here:
-        
+
         String makh = tMaKhTTKhachHang.getText();
         String tenkh = tTenKhTTKhachHang.getText();
         String sdtkh = tSdtTTKhachHang.getText();
